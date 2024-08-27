@@ -1,7 +1,10 @@
 # Start Nushell without using history so it won't interact with the data folder
 nu --no-history
 
-# This commands are only for demo. Don't use them
+# See that the current path contains space and might cause inconvenience and even problems
+$nu.default-config-dir
+
+# These commands are only for demo. Don't use them
 use ~/git/nu-cmd-stack/cmd-stack;
 open ~/git/nushell-show/shows/004.nu | split row "\n\n" | cmd-stack init
 
