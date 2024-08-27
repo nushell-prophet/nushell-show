@@ -50,6 +50,8 @@ git commit -m 'update'
 
 ## 004 - Setting $env.XDG_CONFIG_HOME
 
+[The Nushell Book](https://www.nushell.sh/book/configuration.html) has details on setting `$env.XDG_CONFIG_HOME`.
+
 ```nu
 # Start Nushell without using history so it won't interact with the data folder
 > nu --no-history
