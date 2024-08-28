@@ -16,6 +16,10 @@ config env --default | code --diff - $env.config-path
 
 The next step after opening files should be `cmd + shift + P` and then `>Compare: swap left and Right Editor Side`
 
+## 002 - How to Install Nushell on macOS: A Step-by-Step Guide for Newbies
+
+[Youtube](https://youtu.be/tAJEIDUULdI)
+
 ## 003 - Version Control for Nushell Configs: Setting Up a Git Repository
 
 [Youtube](https://youtu.be/vZh5XZsEjtE?si=OJYfDOVNb6kTqgJ8)
