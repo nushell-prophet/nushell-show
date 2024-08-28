@@ -1,6 +1,4 @@
-# nushell-show
-
-[youtube.com/@nushell-prophet](https://www.youtube.com/@nushell-prophet)
+# nushell-show [youtube.com/@nushell-prophet](https://www.youtube.com/@nushell-prophet)
 
 Random videos about Nushell and materials related to them. 
 All of the videos and materials are available for free reuse anywhere, including in other videos.
