@@ -55,6 +55,8 @@ The next step after opening files should be `cmd + shift + P` and then `>Compare
 
 ## 004 - Setting $env.XDG_CONFIG_HOME
 
+[Youtube](https://youtu.be/7y2ihkdFU50)
+
 On macOS, the default location for Nushell configurations is `~/Library/Application Support/nushell`. The issue with this path is that it contains a space, which can lead to problems and inconveniences later.
 
 In Linux, the `XDG_CONFIG_HOME` environment variable is part of the XDG Base Directory Specification, which defines standard locations for various types of configuration files. However, on macOS, the `XDG_CONFIG_HOME` variable is not set by default, as macOS uses its own conventions for handling configuration files.
