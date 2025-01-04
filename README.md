@@ -123,3 +123,79 @@ https://github.com/nushell-prophet/nu-history-tools
 # list the history of Nushell commands with information about their crates and the Nushell versions (git tags) when they appeared.
 > nu-history-tools list-all-commands
 ```
+
+## 006 - broot as a file picker
+
+```nu no-run
+r###'verbs: [
+    {
+        invocation: "ok"
+        key: "enter"
+        leave_broot: true
+        execution: ":print_path"
+        apply_to: "file"
+    },
+    {
+        invocation: "ok"
+        key: "alt-enter"
+        leave_broot: true
+        execution: ":print_path"
+        apply_to: "any"
+    }
+]
+'### | save ~/.config/broot/select.hjson
+```
+
+```nu no-run
+# return an element from the given position of a command line
+def return-cline-element [
+    $cl: string
+    $pos: int
+] {
+    ast --flatten $cl
+    | flatten
+    | where start <= $pos and end >= $pos
+    | get content.0 -i
+    | default ''
+}
+def broot-source [] {
+    let $broot_closure = {
+        let $cl = commandline
+        let $pos = commandline get-cursor
+
+        let $element = return-cline-element $cl $pos
+
+        let $path_exp = $element
+            | str trim -c '"'
+            | str trim -c "'"
+            | str trim -c '`'
+            | if $in =~ '^~' { path expand } else {}
+            | if ($in | path exists) {} else {'.'}
+
+        let $broot_path = ^broot $path_exp --conf ($env.XDG_CONFIG_HOME | path join broot select.hjson)
+            | if ' ' in $in { $"`($in)`" } else {}
+
+        if $path_exp == '.' {
+            commandline edit --insert $broot_path
+        } else {
+            $cl | str replace $element $broot_path | commandline edit -r $in
+        }
+    }
+
+    view source $broot_closure | lines | skip | drop | to text
+}
+$env.config.keybindings ++= [
+    {
+         name: broot_path_completion
+         modifier: control
+         keycode: char_t
+         mode: [emacs, vi_normal, vi_insert]
+         event: [
+            {
+                send: ExecuteHostCommand
+                cmd: (broot-source)
+            }
+        ]
+    }
+]
+```
