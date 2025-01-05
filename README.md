@@ -127,7 +127,7 @@ https://github.com/nushell-prophet/nu-history-tools
 ## 006 - broot as a file picker
 
 ```nu no-run
-r###'verbs: [
+let $hjson = r###'verbs: [
     {
         invocation: "ok"
         key: "enter"
@@ -143,7 +143,11 @@ r###'verbs: [
         apply_to: "any"
     }
 ]
-'### | save ~/.config/broot/select.hjson
+'###
+
+let $path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.hjson
+
+$hjson | save -f $path
 ```
 
 ```nu no-run
@@ -172,7 +176,8 @@ def broot-source [] {
             | if $in =~ '^~' { path expand } else {}
             | if ($in | path exists) {} else {'.'}
 
-        let $broot_path = ^broot $path_exp --conf ($env.XDG_CONFIG_HOME | path join broot select.hjson)
+        let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.hjson
+        let $broot_path = ^broot $path_exp --conf $config_path
             | if ' ' in $in { $"`($in)`" } else {}
 
         if $path_exp == '.' {
