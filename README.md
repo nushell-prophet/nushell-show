@@ -177,6 +177,7 @@ def broot-source [] {
             | if ($in | path exists) {} else {'.'}
 
         let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.hjson
+
         let $broot_path = ^broot $path_exp --conf $config_path
             | if ' ' in $in { $"`($in)`" } else {}
 
