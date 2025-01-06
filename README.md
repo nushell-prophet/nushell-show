@@ -151,23 +151,19 @@ $hjson | save -f $path
 ```
 
 ```nu no-run
-# return an element from the given position of a command line
-def return-cline-element [
-    $cl: string
-    $pos: int
-] {
-    ast --flatten $cl
-    | flatten
-    | where start <= $pos and end >= $pos
-    | get content.0 -i
-    | default ''
-}
+# I use this overlay to hide from the environment helper commands (like `broot-source`)
+overlay new config-helpers
+
 def broot-source [] {
     let $broot_closure = {
         let $cl = commandline
         let $pos = commandline get-cursor
 
-        let $element = return-cline-element $cl $pos
+        let $element = ast --flatten $cl
+            | flatten
+            | where start <= $pos and end >= $pos
+            | get content.0 -i
+            | default ''
 
         let $path_exp = $element
             | str trim -c '"'
@@ -204,4 +200,6 @@ $env.config.keybindings ++= [
         ]
     }
 ]
+
+overlay hide config-helpers
 ```
