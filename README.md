@@ -124,7 +124,9 @@ https://github.com/nushell-prophet/nu-history-tools
 > nu-history-tools list-all-commands
 ```
 
-## 006 - broot as a file picker
+## 006 - broot as an interactive file picker
+
+https://github.com/Canop/broot
 
 ```nu no-run
 let $hjson = r###'verbs: [
