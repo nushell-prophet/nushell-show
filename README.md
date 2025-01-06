@@ -129,27 +129,12 @@ https://github.com/nushell-prophet/nu-history-tools
 https://github.com/Canop/broot
 
 ```nu no-run
-let $hjson = r###'verbs: [
-    {
-        invocation: "ok"
-        key: "enter"
-        leave_broot: true
-        execution: ":print_path"
-        apply_to: "file"
-    },
-    {
-        invocation: "ok"
-        key: "alt-enter"
-        leave_broot: true
-        execution: ":print_path"
-        apply_to: "any"
-    }
-]
-'###
-
-let $path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.hjson
-
-$hjson | save -f $path
+{verbs:
+    [ [invocation, key, leave_broot, execution, apply_to];
+        [ok, enter, true, ":print_path", file],
+        [ok, alt-enter, true, ":print_path", any]
+    ]
+} | save -f ($env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml)
 ```
 
 ```nu no-run
@@ -174,7 +159,7 @@ def broot-source [] {
             | if $in =~ '^~' { path expand } else {}
             | if ($in | path exists) {} else {'.'}
 
-        let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.hjson
+        let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
 
         let $broot_path = ^broot $path_exp --conf $config_path
             | if ' ' in $in { $"`($in)`" } else {}
