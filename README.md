@@ -137,10 +137,11 @@ git: https://github.com/Canop/broot
 
 let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
 
-{verbs:
-    [ [invocation, key, leave_broot, execution, apply_to];
-        [ok, enter, true, ":print_path", file],
-        [ok, alt-enter, true, ":print_path", any]
+{
+    verbs: [
+        [invocation, key,       leave_broot, execution,     apply_to];
+        [ok,         enter,     true,        ":print_path", file    ],
+        [ok,         alt-enter, true,        ":print_path", any     ]
     ]
 } | save -f $config_path
 ```
