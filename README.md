@@ -123,3 +123,82 @@ https://github.com/nushell-prophet/nu-history-tools
 # list the history of Nushell commands with information about their crates and the Nushell versions (git tags) when they appeared.
 > nu-history-tools list-all-commands
 ```
+
+## 006 - Broot as an Interactive File Picker
+
+> Broot is a better way to navigate directories, find files, and launch commands.
+
+homepage: https://dystroy.org/broot
+git: https://github.com/Canop/broot
+
+```nu no-run
+# Save this configuration to enable Broot to output directory paths on `alt + enter`.
+# Later this config will be used in the keybindings.
+
+let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
+
+{
+    verbs: [
+        [invocation, key,       leave_broot, execution,     apply_to];
+        [ok,         enter,     true,        ":print_path", file    ],
+        [ok,         alt-enter, true,        ":print_path", any     ]
+    ]
+} | save -f $config_path
+```
+
+```nu no-run
+# add the code below to your `config.nu`
+
+# I use this overlay to hide from the environment helper commands (like `broot-source`)
+overlay new config-helpers
+
+# I use `broot-source` command to enable syntax highlighting
+def broot-source [] {
+    let $broot_closure = {
+        let $cl = commandline
+        let $pos = commandline get-cursor
+
+        let $element = ast --flatten $cl
+            | flatten
+            | where start <= $pos and end >= $pos
+            | get content.0 -i
+            | default ''
+
+        let $path_exp = $element
+            | str trim -c '"'
+            | str trim -c "'"
+            | str trim -c '`'
+            | if $in =~ '^~' { path expand } else {}
+            | if ($in | path exists) {} else {'.'}
+
+        let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
+
+        let $broot_path = ^broot $path_exp --conf $config_path
+            | if ' ' in $in { $"`($in)`" } else {}
+
+        if $path_exp == '.' {
+            commandline edit --insert $broot_path
+        } else {
+            $cl | str replace $element $broot_path | commandline edit -r $in
+        }
+    }
+
+    view source $broot_closure | lines | skip | drop | to text
+}
+$env.config.keybindings ++= [
+    {
+         name: broot_path_completion
+         modifier: control
+         keycode: char_t
+         mode: [emacs, vi_normal, vi_insert]
+         event: [
+            {
+                send: ExecuteHostCommand
+                cmd: (broot-source)
+            }
+        ]
+    }
+]
+
+overlay hide config-helpers
+```
