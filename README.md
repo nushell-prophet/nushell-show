@@ -129,6 +129,10 @@ https://github.com/nushell-prophet/nu-history-tools
 https://github.com/Canop/broot
 
 ```nu no-run
+# Save this configuration to enable broot output file paths on `enter`,
+# and directory paths on `alt + enter`.
+# later this config will be used in the keybindings
+
 {verbs:
     [ [invocation, key, leave_broot, execution, apply_to];
         [ok, enter, true, ":print_path", file],
@@ -138,6 +142,8 @@ https://github.com/Canop/broot
 ```
 
 ```nu no-run
+# add the code below to your `config.nu`
+
 # I use this overlay to hide from the environment helper commands (like `broot-source`)
 overlay new config-helpers
 
