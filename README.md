@@ -132,9 +132,8 @@ homepage: https://dystroy.org/broot
 git: https://github.com/Canop/broot
 
 ```nu no-run
-# Save this configuration to enable broot output file paths on `enter`,
-# and directory paths on `alt + enter`.
-# later this config will be used in the keybindings
+# Save this configuration to enable Broot to output directory paths on `alt + enter`.
+# Later this config will be used in the keybindings.
 
 let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
 
@@ -152,6 +151,7 @@ let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot
 # I use this overlay to hide from the environment helper commands (like `broot-source`)
 overlay new config-helpers
 
+# I use `broot-source` command to enable syntax highlighting
 def broot-source [] {
     let $broot_closure = {
         let $cl = commandline
