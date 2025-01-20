@@ -124,9 +124,12 @@ https://github.com/nushell-prophet/nu-history-tools
 > nu-history-tools list-all-commands
 ```
 
-## 006 - broot as an interactive file picker
+## 006 - Broot as an Interactive File Picker
 
-https://github.com/Canop/broot
+> Broot is a better way to navigate directories, find files, and launch commands.
+
+homepage: https://dystroy.org/broot
+git: https://github.com/Canop/broot
 
 ```nu no-run
 # Save this configuration to enable broot output file paths on `enter`,
