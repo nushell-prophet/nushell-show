@@ -4,7 +4,7 @@ Random videos about Nushell and materials related to them.
 All of the videos and materials are available for free reuse anywhere, including in other videos.
 Let's popularize Nushell!
 
-## 001 - Keeping Nushell settings up to date with new releases
+## 001 - Keeping Nushell settings up to date with new releases (outdated after 0.100)
 
 [Youtube](https://youtu.be/OqJ4nFE46Eg).
 
