@@ -133,12 +133,14 @@ https://github.com/Canop/broot
 # and directory paths on `alt + enter`.
 # later this config will be used in the keybindings
 
+let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
+
 {verbs:
     [ [invocation, key, leave_broot, execution, apply_to];
         [ok, enter, true, ":print_path", file],
         [ok, alt-enter, true, ":print_path", any]
     ]
-} | save -f ($env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml)
+} | save -f $config_path
 ```
 
 ```nu no-run
