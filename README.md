@@ -202,3 +202,46 @@ $env.config.keybindings ++= [
 
 overlay hide config-helpers
 ```
+
+Bonus! The keybinding above works well in commbination with the keybinding that allows choosing CWDs
+
+Note: needs history to be in Sqlite format
+
+```nu no-run
+overlay new config-helpers
+
+$env.config.menus ++= [
+    {
+        # List all unique successful commands
+        name: working_dirs_cd_menu
+        only_buffer_difference: true
+        marker: "? "
+        type: {
+            layout: list
+            page_size: 23
+        }
+        style: {
+            text: green
+            selected_text: green_reverse
+        }
+        source: {|buffer, position|
+            open $nu.history-path
+            | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
+            | get CWD
+            | where $it =~ $buffer
+            | each {|it| {value: $it}}
+        }
+    }
+]
+$env.config.keybindings ++= [
+    {
+        name: "working_dirs_cd_menu"
+        modifier: alt_shift
+        keycode: char_r
+        mode: emacs
+        event: { send: menu name: working_dirs_cd_menu}
+    }
+]
+
+overlay hide config-helpers
+```
