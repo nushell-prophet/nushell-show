@@ -138,7 +138,7 @@ $env.config.completions.algorithm = "Fuzzy"
 
 ### FZF
 
-homepage: https://junegunn.github.io/fzf/
+homepage: https://junegunn.github.io/fzf
 github: https://github.com/junegunn/fzf
 
 ```nu
@@ -169,7 +169,7 @@ $env.config.keybindings ++= [
 > Broot is a better way to navigate directories, find files, and launch commands.
 
 homepage: https://dystroy.org/broot
-git: https://github.com/Canop/broot
+github: https://github.com/Canop/broot
 
 ```nu no-run
 # Save this configuration to enable Broot to output directory paths on `alt + enter`.
