@@ -124,7 +124,47 @@ https://github.com/nushell-prophet/nu-history-tools
 > nu-history-tools list-all-commands
 ```
 
-## 006 - Broot as an Interactive File Picker
+## 006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot
+
+### Default command-line method
+
+Nushell, by default, provides a powerful and convenient way to navigate through file paths that can be launched with the TAB key. If a user needs to look for paths of files or folders in their current directory, they can simply type the quote character '"' and then hit `tab`.
+
+Additionally, a user might find the following setting, which is inactive by default, useful:
+
+```nu
+$env.config.completions.algorithm = "Fuzzy"
+```
+
+### FZF
+
+homepage: https://junegunn.github.io/fzf/
+github: https://github.com/junegunn/fzf
+
+```nu
+# I found the code below here: https://discord.com/channels/601130461678272522/615253963645911060/1209827461496569876
+$env.config.keybindings ++= [
+    {
+        name: fzf_files
+        modifier: control
+        keycode: char_t
+        mode: [emacs, vi_normal, vi_insert]
+        event: [
+          {
+            send: executehostcommand
+            cmd: "
+              let fzf_ctrl_t_command = \"fd --type=file | fzf --preview 'bat --color=always --style=full --line-range=:500 {}'\";
+              let result = nu -c $fzf_ctrl_t_command;
+              commandline edit --append $result;
+              commandline set-cursor --end
+            "
+          }
+        ]
+    }
+]
+```
+
+### Broot
 
 > Broot is a better way to navigate directories, find files, and launch commands.
 
@@ -203,45 +243,3 @@ $env.config.keybindings ++= [
 overlay hide config-helpers
 ```
 
-Bonus! The keybinding above works well in commbination with the keybinding that allows choosing CWDs
-
-Note: needs history to be in Sqlite format
-
-```nu no-run
-overlay new config-helpers
-
-$env.config.menus ++= [
-    {
-        # List all unique successful commands
-        name: working_dirs_cd_menu
-        only_buffer_difference: true
-        marker: "? "
-        type: {
-            layout: list
-            page_size: 23
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-        }
-        source: {|buffer, position|
-            open $nu.history-path
-            | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
-            | get CWD
-            | where $it =~ $buffer
-            | each {|it| {value: $it}}
-        }
-    }
-]
-$env.config.keybindings ++= [
-    {
-        name: "working_dirs_cd_menu"
-        modifier: alt_shift
-        keycode: char_r
-        mode: emacs
-        event: { send: menu name: working_dirs_cd_menu}
-    }
-]
-
-overlay hide config-helpers
-```
