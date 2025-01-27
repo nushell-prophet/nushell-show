@@ -171,10 +171,10 @@ $env.config.keybindings ++= [
 homepage: https://dystroy.org/broot
 github: https://github.com/Canop/broot
 
-```nu no-run
-# Save this configuration to enable Broot to output directory paths on `alt + enter`.
-# Later this config will be used in the keybindings.
+Save this configuration to enable Broot to output directory paths on `alt + enter`.
+Later this config will be used in the keybindings.
 
+```nu no-run
 let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
 
 {
@@ -186,13 +186,12 @@ let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot
 } | save -f $config_path
 ```
 
+add the code below to your `config.nu`
+
 ```nu no-run
-# add the code below to your `config.nu`
+overlay new config-helpers # I use this overlay to hide from the environment helper commands (such as `broot-source`)
 
-# I use this overlay to hide from the environment helper commands (like `broot-source`)
-overlay new config-helpers
-
-# I use `broot-source` command to enable syntax highlighting
+# I use the `broot-source` command to enable syntax highlighting in edit mode.
 def broot-source [] {
     let $broot_closure = {
         let $cl = commandline
@@ -237,6 +236,49 @@ $env.config.keybindings ++= [
                 cmd: (broot-source)
             }
         ]
+    }
+]
+
+overlay hide config-helpers
+```
+
+Bonus! The keybinding above works well in combination with the keybinding that allows choosing CWDs.
+
+Note: It needs the history to be in SQLite format.
+
+```nu no-run
+overlay new config-helpers
+
+$env.config.menus ++= [
+    {
+        # List all unique successful commands
+        name: working_dirs_cd_menu
+        only_buffer_difference: true
+        marker: "? "
+        type: {
+            layout: list
+            page_size: 23
+        }
+        style: {
+            text: green
+            selected_text: green_reverse
+        }
+        source: {|buffer, position|
+            open $nu.history-path
+            | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
+            | get CWD
+            | where $it =~ $buffer
+            | each {|it| {value: $it}}
+        }
+    }
+]
+$env.config.keybindings ++= [
+    {
+        name: "working_dirs_cd_menu"
+        modifier: alt_shift
+        keycode: char_r
+        mode: emacs
+        event: { send: menu name: working_dirs_cd_menu}
     }
 ]
 
