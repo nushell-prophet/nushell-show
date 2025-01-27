@@ -128,7 +128,7 @@ https://github.com/nushell-prophet/nu-history-tools
 
 ### Default command-line method
 
-Nushell, by default, provides a powerful and convenient way to navigate through file paths that can be launched with the TAB key. If a user needs to look for paths of files or folders in their current directory, they can simply type the quote character '"' and then hit `tab`.
+Nushell, by default, provides a powerful and convenient way to navigate through file paths that can be launched with the TAB key. If a user needs to look for paths of files or folders in their current directory, they can simply type the quote character `"` and then hit `tab`.
 
 Additionally, a user might find the following setting, which is inactive by default, useful:
 
