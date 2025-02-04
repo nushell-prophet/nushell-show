@@ -4,6 +4,15 @@ Random videos about Nushell and materials related to them.
 All of the videos and materials are available for free reuse anywhere, including in other videos.
 Let's popularize Nushell!
 
+### Table of contents
+
+- [001 - Keeping Nushell settings up to date with new releases (outdated after 0.100)](#001---keeping-nushell-settings-up-to-date-with-new-releases-outdated-after-0100)
+- [002 - How to Install Nushell on macOS: A Step-by-Step Guide for Newbies](#002---how-to-install-nushell-on-macos-a-step-by-step-guide-for-newbies)
+- [003 - Version Control for Nushell Configs: Setting Up a Git Repository](#003---version-control-for-nushell-configs-setting-up-a-git-repository)
+- [004 - Setting $env.XDG\_CONFIG\_HOME](#004---setting-envxdg_config_home)
+- [005 - nu-history-tools - benchmark your commands usage against of other users](#005---nu-history-tools---benchmark-your-commands-usage-against-of-other-users)
+- [006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot](#006---navigating-file-paths-in-nushell-using-internal-functionality-fzf-or-broot)
+
 ## 001 - Keeping Nushell settings up to date with new releases (outdated after 0.100)
 
 [Youtube](https://youtu.be/OqJ4nFE46Eg).
