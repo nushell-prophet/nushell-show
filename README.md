@@ -147,6 +147,46 @@ Additionally, a user might find the following setting, which is inactive by defa
 $env.config.completions.algorithm = "Fuzzy"
 ```
 
+Here is the keybinding that allows you to paste paths of recently visited directories.
+
+```nu no-run
+# make sure that you use sqlite nushell history
+$env.config.history.file_format = "Sqlite"
+
+$env.config.menus ++= [
+    {
+        # List all unique successful commands
+        name: working_dirs_cd_menu
+        only_buffer_difference: true
+        marker: "? "
+        type: {
+            layout: list
+            page_size: 23
+        }
+        style: {
+            text: green
+            selected_text: green_reverse
+        }
+        source: {|buffer, position|
+            open $nu.history-path
+            | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
+            | get CWD
+            | where $it =~ $buffer
+            | each {|it| {value: $it}}
+        }
+    }
+]
+$env.config.keybindings ++= [
+    {
+        name: "working_dirs_cd_menu"
+        modifier: alt_shift
+        keycode: char_r
+        mode: emacs
+        event: { send: menu name: working_dirs_cd_menu}
+    }
+]
+```
+
 ### FZF
 
 homepage: https://junegunn.github.io/fzf
@@ -247,49 +287,6 @@ $env.config.keybindings ++= [
                 cmd: (broot-source)
             }
         ]
-    }
-]
-
-overlay hide config-helpers
-```
-
-Bonus! The keybinding above works well in combination with the keybinding that allows choosing CWDs.
-
-Note: It needs the history to be in SQLite format.
-
-```nu no-run
-overlay new config-helpers
-
-$env.config.menus ++= [
-    {
-        # List all unique successful commands
-        name: working_dirs_cd_menu
-        only_buffer_difference: true
-        marker: "? "
-        type: {
-            layout: list
-            page_size: 23
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-        }
-        source: {|buffer, position|
-            open $nu.history-path
-            | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
-            | get CWD
-            | where $it =~ $buffer
-            | each {|it| {value: $it}}
-        }
-    }
-]
-$env.config.keybindings ++= [
-    {
-        name: "working_dirs_cd_menu"
-        modifier: alt_shift
-        keycode: char_r
-        mode: emacs
-        event: { send: menu name: working_dirs_cd_menu}
     }
 ]
 
