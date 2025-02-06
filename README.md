@@ -172,7 +172,9 @@ $env.config.menus ++= [
             | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
             | get CWD
             | where $it =~ $buffer
-            | each {|it| {value: $it}}
+            | each {
+                if ($in has ' ') { $'"($in)"' } else {}
+            }
         }
     }
 ]
