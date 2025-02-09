@@ -230,6 +230,7 @@ Later this config will be used in the keybindings.
 
 ```nu no-run
 let $config_path = $env.XDG_CONFIG_HOME? | default '~/.config' | path join broot select.toml
+mkdir ($config_path | path dirname) 
 
 {
     verbs: [
