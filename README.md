@@ -174,6 +174,7 @@ $env.config.menus ++= [
             | where $it =~ $buffer
             | each {
                 if ($in has ' ') { $'"($in)"' } else {}
+                | {value: $in}
             }
         }
     }
