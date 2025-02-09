@@ -244,8 +244,6 @@ mkdir ($config_path | path dirname)
 add the code below to your `config.nu`
 
 ```nu no-run
-overlay new config-helpers # I use this overlay to hide from the environment helper commands (such as `broot-source`)
-
 # I use the `broot-source` command to enable syntax highlighting in edit mode.
 def broot-source [] {
     let $broot_closure = {
@@ -293,7 +291,5 @@ $env.config.keybindings ++= [
         ]
     }
 ]
-
-overlay hide config-helpers
 ```
 
