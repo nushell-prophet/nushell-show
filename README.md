@@ -171,7 +171,9 @@ $env.config.menus ++= [
             open $nu.history-path
             | query db "SELECT DISTINCT(cwd) FROM history ORDER BY id DESC"
             | get CWD
+            | into string
             | where $it =~ $buffer
+            | compact --empty
             | each {
                 if ($in has ' ') { $'"($in)"' } else {}
                 | {value: $in}
