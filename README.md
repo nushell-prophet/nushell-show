@@ -299,22 +299,15 @@ $env.config.keybindings ++= [
 
 ## 007 - topiary-nushell
 
-```nu no-run
-# if cargo is not installed, install it.
-# you can find instructions on the website: https://doc.rust-lang.org/cargo/getting-started/installation.html
-# alternatively, you can execute this command.
-if (which cargo | is-empty) {
-    curl https://sh.rustup.rs -sSf | sh
-}
-```
+### Installation
 
+1. Install rust and cargo using instructions [https://doc.rust-lang.org/cargo/getting-started/installation.html]
+2. Restart nushell and make sure that `.cargo/bin` is in your `$env.PATH`
 ```nu no-run
 # restart nushell
 nu
 
-# make sure that `.cargo/bin` is in your $env.PATH
 $env.PATH | find 'cargo'
 ```
-
-Follow the installation instructions [https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup].
+3. Follow the installation instructions for `topiary-nushell` [https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup].
 
