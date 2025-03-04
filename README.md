@@ -35,7 +35,7 @@ The next step after opening files should be `cmd + shift + P` and then `>Compare
 
 [Youtube](https://youtu.be/vZh5XZsEjtE?si=OJYfDOVNb6kTqgJ8)
 
-```nu
+```nu no-run
 # Change directory to the path stored in the environment variable '$nu.default-config-dir'
 > cd $nu.default-config-dir
 
@@ -116,7 +116,7 @@ A Nushell module to analyze the command frequencies in Nushell history, generate
 
 https://github.com/nushell-prophet/nu-history-tools
 
-```nu
+```nu no-run
 # analyze your current commands history
 > nu-history-tools analyze-history
 
