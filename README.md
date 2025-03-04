@@ -36,8 +36,8 @@ The next step after opening files should be `cmd + shift + P` and then `>Compare
 [Youtube](https://youtu.be/vZh5XZsEjtE?si=OJYfDOVNb6kTqgJ8)
 
 ```nu
-# Change directory to the path stored in the environment variable 'nu.data-dir'
-> cd $nu.data-dir
+# Change directory to the path stored in the environment variable '$nu.default-config-dir'
+> cd $nu.default-config-dir
 
 # Initialize a new Git repository in the current directory
 > git init
