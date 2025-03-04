@@ -301,14 +301,16 @@ $env.config.keybindings ++= [
 
 ### Installation
 
-1. Install `rust` and `cargo` using instructions <https://doc.rust-lang.org/cargo/getting-started/installation.html>
-2. Check installation
+1. Install `rust` and `cargo` using the instructions found at <https://doc.rust-lang.org/cargo/getting-started/installation.html>.
+2. Check the installation:
 ```nu no-run
-# restart nushell
+# Restart Nushell
 nu
 
-# make sure that .cargo/bin is in your $env.PATH
+# Make sure that .cargo/bin is in your $env.PATH
 $env.PATH | find 'cargo'
 ```
-3. Follow the installation instructions for `topiary-nushell` <https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup>.
+3. Follow the installation instructions for `topiary-nushell` at <https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup>.
+
+
 
