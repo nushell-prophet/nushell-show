@@ -302,11 +302,12 @@ $env.config.keybindings ++= [
 ### Installation
 
 1. Install rust and cargo using instructions [https://doc.rust-lang.org/cargo/getting-started/installation.html]
-2. Restart nushell and make sure that `.cargo/bin` is in your `$env.PATH`
+2. Check installation
 ```nu no-run
 # restart nushell
 nu
 
+# make sure that .cargo/bin is in your $env.PATH
 $env.PATH | find 'cargo'
 ```
 3. Follow the installation instructions for `topiary-nushell` [https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup].
