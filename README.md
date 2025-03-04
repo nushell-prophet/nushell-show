@@ -135,6 +135,8 @@ https://github.com/nushell-prophet/nu-history-tools
 
 ## 006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot
 
+[Youtube](https://www.youtube.com/watch?v=Bsa8jUtjvPU)
+
 ### Default command-line method
 
 Nushell, by default, provides a powerful and convenient way to navigate through file paths that can be launched with the TAB key.
