@@ -301,7 +301,7 @@ $env.config.keybindings ++= [
 
 ### Installation
 
-1. Install rust and cargo using instructions <https://doc.rust-lang.org/cargo/getting-started/installation.html>
+1. Install `rust` and `cargo` using instructions <https://doc.rust-lang.org/cargo/getting-started/installation.html>
 2. Check installation
 ```nu no-run
 # restart nushell
