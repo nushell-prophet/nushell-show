@@ -324,7 +324,11 @@ def 'insert-new-lines' [] {
     let $cmd = $in
 
     ast --flatten $cmd
-    | filter {|it| $it.shape == shape_pipe or ($it.shape == 'shape_internalcall' and $it.content in [let mut]) }
+    | filter {|it|
+        $it.shape == shape_pipe or (
+            $it.shape == 'shape_internalcall' and $it.content in [let mut]
+        )
+    }
     | insert new_lines {|i| if $i.shape == shape_pipe { "\n" } else { "\n\n" } }
     | update span { get start }
     | select span new_lines
