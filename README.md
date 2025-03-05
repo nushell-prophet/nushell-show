@@ -312,5 +312,51 @@ $env.PATH | find 'cargo'
 ```
 3. Follow the installation instructions for `topiary-nushell` at <https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup>.
 
+### Format oneliners
 
+As of now, topiary-nushell cares the most about indentations and adds new lines only if some of them are present in the original code. I wrote a simple custom command that uses the built-in `ast` command, finds pipe symbols and `let/mut` keywords, and inserts new lines before them, allowing topiary to take care of removing redundant new lines.
 
+This command allows formatting one-liners that I write quite often. This is a copy of the command from my [nu-goodies](https://github.com/nushell-prophet/nu-goodies/blob/30335f830bc5203f401afcb3bb577c67a0469cc9/nu-goodies/commands.nu#L1633) module.
+
+```nu no-run
+# Insert new lines before the pipe symbol and let/mut
+def 'insert-new-lines' [] {
+    let $cmd = $in
+
+    ast --flatten $cmd
+    | filter {|it| $it.shape == shape_pipe or ($it.shape == 'shape_internalcall' and $it.content in [let mut]) }
+    | insert new_lines {|i| if $i.shape == shape_pipe { "\n" } else { "\n\n" } }
+    | update span { get start }
+    | select span new_lines
+    | reverse
+    | reduce --fold (
+        $cmd
+        | split chars
+    ) {|i| insert $i.span $i.new_lines }
+    | str join
+}
+
+# Format piped in Nushell code or previous command from history using Topiary.
+export def 'nu-format' [
+    --no-new-lines (-n) # don't insert new lines
+]: [nothing -> nothing string -> string] {
+    let input = $in
+
+    let cmd = if $input == null {
+        history
+        | last 2
+        | first
+        | get command
+    } else { $input }
+
+    $cmd
+    | if $no_new_lines { } else {
+        insert-new-lines
+    }
+    | topiary format --language nu
+    | if $input == null {
+        commandline edit -r $in
+        return
+    } else { }
+}
+```
