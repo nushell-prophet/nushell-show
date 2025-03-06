@@ -12,6 +12,7 @@ Let's popularize Nushell!
 - [004 - Setting $env.XDG\_CONFIG\_HOME](#004---setting-envxdg_config_home)
 - [005 - nu-history-tools - benchmark your commands usage against of other users](#005---nu-history-tools---benchmark-your-commands-usage-against-of-other-users)
 - [006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot](#006---navigating-file-paths-in-nushell-using-internal-functionality-fzf-or-broot)
+- [007 - topiary-nushell](#007---topiary-nushell)
 
 ## 001 - Keeping Nushell settings up to date with new releases (outdated after 0.100)
 
@@ -297,3 +298,83 @@ $env.config.keybindings ++= [
 ]
 ```
 
+## 007 - topiary-nushell
+
+- [Topiary](https://github.com/tweag/topiary): tree-sitter based uniform formatter
+- <https://github.com/blindFS/topiary-nushell>
+
+### Installation
+
+1. Install `rust` and `cargo` using the instructions found at <https://doc.rust-lang.org/cargo/getting-started/installation.html>.
+2. Check the installation:
+```nu no-run
+# Restart Nushell
+nu
+
+# Make sure that .cargo/bin is in your $env.PATH
+$env.PATH | find 'cargo'
+```
+3. Follow the installation instructions for `topiary-nushell` at <https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup>.
+
+### 4 spaces indentations
+
+Just add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
+
+### Demo for the nushell-show
+
+```nu no-run
+topiary format shows/topiary-demo/topiary-demo.nu
+```
+
+### Format oneliners
+
+As of now, topiary-nushell cares the most about indentations and adds new lines only if some of them are present in the original code. I wrote a simple custom command that uses the built-in `ast` command, finds pipe symbols and `let/mut` keywords, and inserts new lines before them, allowing topiary to take care of removing redundant new lines.
+
+This command allows formatting one-liners that I write quite often. This is a copy of the command from my [nu-goodies](https://github.com/nushell-prophet/nu-goodies/blob/30335f830bc5203f401afcb3bb577c67a0469cc9/nu-goodies/commands.nu#L1633) module.
+
+```nu no-run
+# Insert new lines before the pipe symbol and let/mut
+def 'insert-new-lines' [] {
+    let $cmd = $in
+
+    ast --flatten $cmd
+    | filter {|it|
+        $it.shape == shape_pipe or (
+            $it.shape == 'shape_internalcall' and $it.content in [let mut]
+        )
+    }
+    | insert new_lines {|i| if $i.shape == shape_pipe { "\n" } else { "\n\n" } }
+    | update span { get start }
+    | select span new_lines
+    | reverse
+    | reduce --fold (
+        $cmd
+        | split chars
+    ) {|i| insert $i.span $i.new_lines }
+    | str join
+}
+
+# Format piped in Nushell code or previous command from history using Topiary.
+export def 'nu-format' [
+    --no-new-lines (-n) # don't insert new lines
+]: [nothing -> nothing string -> string] {
+    let input = $in
+
+    let cmd = if $input == null {
+        history
+        | last 2
+        | first
+        | get command
+    } else { $input }
+
+    $cmd
+    | if $no_new_lines { } else {
+        insert-new-lines
+    }
+    | topiary format --language nu
+    | if $input == null {
+        commandline edit -r $in
+        return
+    } else { }
+}
+```
