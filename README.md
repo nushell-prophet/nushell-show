@@ -316,6 +316,12 @@ $env.PATH | find 'cargo'
 
 Just add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
 
+### Demo for the nushell-show
+
+```nu no-run
+topiary format shows/topiary-demo/topiary-demo.nu
+```
+
 ### Format oneliners
 
 As of now, topiary-nushell cares the most about indentations and adds new lines only if some of them are present in the original code. I wrote a simple custom command that uses the built-in `ast` command, finds pipe symbols and `let/mut` keywords, and inserts new lines before them, allowing topiary to take care of removing redundant new lines.
