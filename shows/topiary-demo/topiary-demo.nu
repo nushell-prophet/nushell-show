@@ -1,4 +1,5 @@
 use std repeat
+# Example custom commands are taken from /Users/user/git/nu-goodies/nu-goodies/commands.nu
 # normalize values in given columns
 #
 # > [[a b]; [1 2] [3 4] [a null]] | normalize a b
