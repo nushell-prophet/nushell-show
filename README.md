@@ -12,6 +12,7 @@ Let's popularize Nushell!
 - [004 - Setting $env.XDG\_CONFIG\_HOME](#004---setting-envxdg_config_home)
 - [005 - nu-history-tools - benchmark your commands usage against of other users](#005---nu-history-tools---benchmark-your-commands-usage-against-of-other-users)
 - [006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot](#006---navigating-file-paths-in-nushell-using-internal-functionality-fzf-or-broot)
+- [007 - topiary-nushell](#007---topiary-nushell)
 
 ## 001 - Keeping Nushell settings up to date with new releases (outdated after 0.100)
 
