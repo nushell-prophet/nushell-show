@@ -299,6 +299,9 @@ $env.config.keybindings ++= [
 
 ## 007 - topiary-nushell
 
+- [Topiary](https://github.com/tweag/topiary): tree-sitter based uniform formatter
+- <https://github.com/blindFS/topiary-nushell>
+
 ### Installation
 
 1. Install `rust` and `cargo` using the instructions found at <https://doc.rust-lang.org/cargo/getting-started/installation.html>.
