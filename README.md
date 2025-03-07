@@ -301,7 +301,7 @@ $env.config.keybindings ++= [
 ## 007 - topiary-nushell
 
 - [Topiary](https://github.com/tweag/topiary): tree-sitter based uniform formatter
-- <https://github.com/blindFS/topiary-nushell>
+- [Topiary-nushell](https://github.com/blindFS/topiary-nushell): configuration files that enable nushell code formatting
 
 ### Installation
 
