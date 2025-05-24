@@ -323,7 +323,7 @@ Just add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did
 ### Demo for the nushell-show
 
 ```nu no-run
-topiary format shows/topiary-demo/topiary-demo.nu
+topiary format shows/007-topiary-demo/topiary-demo.nu
 ```
 
 ### Format oneliners
