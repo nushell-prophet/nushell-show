@@ -50,8 +50,14 @@
     # Перемещаем конфигурацию в новое место
     mv $nu.default-config-dir ~/.config/
 
+    # Проверяем, что у нас появилась папка
+    ls ~/.config/nushell
+
     # Создаём символическую ссылку
     ln -s ~/.config/nushell ($nu.default-config-dir | path split | drop | path join)
+
+    # Проверяем что символическая ссылка работает
+    ls $nu.default-config-dir
 
     # Выходим из nushell
     exit
@@ -86,13 +92,6 @@
     $nu.default-config-dir
 ```
 
-1. Базовые настройки
-
-```nushell
-    # Открываем конфигурационный файл
-    config nu
-```
-
 1. Инициализация git-репозитория
 
 ```bash
@@ -107,4 +106,67 @@
 
     # Создаём первый коммит
     git commit -m "Initial nushell configuration"
+
+    # задаем имя пользователя и почту
+    git config set --global user.name 'Maxim Uvarov'
+    git config set --global user.email 'nushell-prophet-demo@users.noreply.github.com'
+
+    # Редактируем автора последнего комита
+    git commit --ammend --reset-author
+```
+
+1. Базовые настройки
+
+```nushell
+    # Открываем env файл
+    config env
+
+    # Если переменная $env.EDITOR не задана
+    $env.EDITOR = 'code'
+
+    # Открываем env файл снова
+    config env
+```
+
+    Добавляем туда уже знакомую строку `$env.EDITOR = 'code'`
+
+    Перезапускаем nushell
+
+```nu
+    nu
+    config nu
+```
+
+    Добавляем туда строчки:
+
+```nu
+    $env.config.history.file_format = "sqlite"
+    $env.config.history.max_size = 5_000_000
+    $env.config.show_banner = false
+```
+
+    Перезапускаме nushell
+
+```nu
+    nu
+    cd ~/.config/
+    git status
+
+    # добавляем наши измения
+    git add nushell/config.nu nushell/env.nu
+    git commit -m 'first settings'
+
+    # Проверяем снова
+    git status
+
+    # Видим что остались файлы истории
+    code .gitignore
+
+    # добавляем nushell/history*
+
+    # Проверяем
+    git status
+
+    git add .gitignore
+    git commit -m 'Add history files to gitignore'
 ```
