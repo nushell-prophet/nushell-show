@@ -1,7 +1,5 @@
 # Установка Nushell с 0 на MacOS Tahoe
 
-Необходимые программы:
-
 1. Установка VS Code
 
     https://code.visualstudio.com
