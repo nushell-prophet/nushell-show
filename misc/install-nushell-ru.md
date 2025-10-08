@@ -4,17 +4,20 @@
 
 1. Установка VS Code
 
-   https://code.visualstudio.com
+    https://code.visualstudio.com
 
-2. Установка brew
+1. Установка brew
 
-   https://brew.sh
+    Открываем https://brew.sh, копируем команду
+    Открываем terminal, вставляем команду, нажимаем enter
+
+    После выполнения копируем команды, которые нам предоставил brew, вставляем в терминал, исполняем.
 
 ```bash
     brew doctor
 ```
 
-3. Установка nushell
+1. Установка nushell
 
 ```bash
     brew info nushell
@@ -22,9 +25,9 @@
     nu
 ```
 
-4. Настройка XDG_CONFIG_HOME
+1. Настройка XDG_CONFIG_HOME
 
-   Проверяем, что путь содержит пробел
+    Проверяем, что путь содержит пробел
 
 ```nushell
     $nu.default-config-dir
@@ -39,11 +42,13 @@
     ln -s ~/.config/nushell ($nu.default-config-dir | path split | drop | path join)
 ```
 
+    Далее добавляем переменную окружения XDG_CONFIG_HOME 
+
 ```bash
     code ~/.zshrc
 ```
 
-    Если мы видим ошибку, что команда `code` не найдена, то открываем VS Code, нажимаем ctrl+shift+p, вводим `install path`, находим команду, нажимаем enter, вводим пароль администратора. И потом в терминале повторяем команду `code ~/.zshrc`
+    Если мы видим ошибку, что команда `code` не найдена, то открываем VS Code, нажимаем `ctrl+shift+p`, вводим `install path`, находим команду, нажимаем enter, вводим пароль администратора. И потом в терминале повторяем команду `code ~/.zshrc`
 
     В открывшемся VS Code добавляем следующий код:
 
@@ -57,5 +62,12 @@
     echo $XDG_CONFIG_HOME
 ```
 
-5. Базовые настройки
-6. Инициализация git репозитория
+```nushell
+    # Запускаем nushell
+    nu
+
+    # Проверяем, что новый путь не содержит пробела
+    $nu.default-config-dir
+```
+1. Базовые настройки
+1. Инициализация git репозитория
