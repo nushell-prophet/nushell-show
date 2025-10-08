@@ -182,4 +182,3 @@ git status
 git add .gitignore
 git commit -m "Add history files to gitignore"
 ```
-
