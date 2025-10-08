@@ -1,10 +1,10 @@
 # Установка Nushell с нуля на MacOS Tahoe
 
-### Установка VS Code
+## Установка VS Code
 
 https://code.visualstudio.com
 
-### Установка Homebrew
+## Установка Homebrew
 
 Открываем https://brew.sh, копируем команду установки.
 Открываем Terminal, вставляем команду, нажимаем Enter.
@@ -16,7 +16,7 @@ https://code.visualstudio.com
 brew doctor
 ```
 
-### Установка Nushell
+## Установка Nushell
 
 ```bash
 # Смотрим информацию о пакете
@@ -29,7 +29,7 @@ brew install nushell
 nu
 ```
 
-### Подготовка к использованию XDG_CONFIG_HOME
+## Подготовка к использованию XDG_CONFIG_HOME
 
 Проверяем текущий путь конфигурации:
 
@@ -62,7 +62,7 @@ ls $nu.default-config-dir
 
 Закрываем вкладку терминала, открываем новую вкладку с zsh.
 
-### Настройка XDG_CONFIG_HOME
+## Настройка XDG_CONFIG_HOME
 
 Добавляем переменную окружения в конфигурацию zsh (будет устанавливаться при каждом запуске терминала):
 
@@ -93,7 +93,7 @@ nu
 $nu.default-config-dir
 ```
 
-### Инициализация git-репозитория
+## Инициализация git-репозитория
 
 ```bash
 # Переходим в директорию конфигурации
@@ -116,7 +116,7 @@ git config --global user.email "nushell-prophet-demo@users.noreply.github.com"
 git commit --amend --reset-author
 ```
 
-### Базовые настройки
+## Базовые настройки
 
 ```nushell
 # Открываем файл переменных окружения
