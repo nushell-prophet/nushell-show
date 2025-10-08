@@ -107,66 +107,75 @@
     # Создаём первый коммит
     git commit -m "Initial nushell configuration"
 
-    # задаем имя пользователя и почту
-    git config set --global user.name 'Maxim Uvarov'
-    git config set --global user.email 'nushell-prophet-demo@users.noreply.github.com'
+    # Задаём имя пользователя и почту
+    git config --global user.name 'Maxim Uvarov'
+    git config --global user.email 'nushell-prophet-demo@users.noreply.github.com'
 
-    # Редактируем автора последнего комита
-    git commit --ammend --reset-author
+    # Редактируем автора последнего коммита
+    git commit --amend --reset-author
 ```
 
 1. Базовые настройки
 
 ```nushell
-    # Открываем env файл
-    config env
-
-    # Если переменная $env.EDITOR не задана
-    $env.EDITOR = 'code'
-
-    # Открываем env файл снова
+    # Открываем файл переменных окружения
     config env
 ```
 
-    Добавляем туда уже знакомую строку `$env.EDITOR = 'code'`
+    Если переменная `$env.EDITOR` не задана, добавляем в файл:
 
-    Перезапускаем nushell
+    `$env.EDITOR = 'code'`
 
-```nu
+    Сохраняем и перезапускаем nushell:
+
+```nushell
     nu
+
+    # Открываем основной конфигурационный файл
     config nu
 ```
 
-    Добавляем туда строчки:
+    Добавляем настройки истории и баннера:
 
-```nu
+```nushell
     $env.config.history.file_format = "sqlite"
     $env.config.history.max_size = 5_000_000
     $env.config.show_banner = false
 ```
 
-    Перезапускаме nushell
+    Сохраняем, перезапускаем nushell и коммитим изменения:
 
-```nu
+```nushell
     nu
     cd ~/.config/
+
+    # Смотрим что изменилось
     git status
 
-    # добавляем наши измения
+    # Добавляем наши изменения
     git add nushell/config.nu nushell/env.nu
     git commit -m 'first settings'
 
-    # Проверяем снова
+    # Проверяем ещё раз
     git status
+```
 
-    # Видим что остались файлы истории
+    Видим, что остались файлы истории. Создаём `.gitignore`:
+
+```bash
+    # Открываем .gitignore в редакторе
     code .gitignore
+```
 
-    # добавляем nushell/history*
+    Добавляем туда строку: `nushell/history*`
 
-    # Проверяем
+    Сохраняем и коммитим:
+
+```nushell
+    # Проверяем что файлы истории больше не показываются
     git status
 
+    # Добавляем .gitignore
     git add .gitignore
     git commit -m 'Add history files to gitignore'
 ```
