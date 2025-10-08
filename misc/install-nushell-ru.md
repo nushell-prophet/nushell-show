@@ -109,8 +109,8 @@ git add nushell/config.nu nushell/env.nu
 git commit -m "Initial nushell configuration"
 
 # Задаём имя пользователя и почту
-git config --global user.name 'Maxim Uvarov'
-git config --global user.email 'nushell-prophet-demo@users.noreply.github.com'
+git config --global user.name "Maxim Uvarov"
+git config --global user.email "nushell-prophet-demo@users.noreply.github.com"
 
 # Редактируем автора последнего коммита
 git commit --amend --reset-author
@@ -125,7 +125,7 @@ config env
 
 Если переменная `$env.EDITOR` не задана, добавляем в файл:
 
-`$env.EDITOR = 'code'`
+`$env.EDITOR = "code"`
 
 Сохраняем и перезапускаем nushell:
 
@@ -155,7 +155,7 @@ git status
 
 # Добавляем наши изменения
 git add nushell/config.nu nushell/env.nu
-git commit -m 'first settings'
+git commit -m "first settings"
 
 # Проверяем ещё раз
 git status
@@ -178,5 +178,5 @@ git status
 
 # Добавляем .gitignore
 git add .gitignore
-git commit -m 'Add history files to gitignore'
+git commit -m "Add history files to gitignore"
 ```
