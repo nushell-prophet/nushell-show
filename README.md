@@ -303,20 +303,26 @@ $env.config.keybindings ++= [
 
 ### Installation
 
-1. Install `rust` and `cargo` using the instructions found at <https://doc.rust-lang.org/cargo/getting-started/installation.html>.
-2. Check the installation:
-```nu no-run
-# Restart Nushell
-nu
+The old way was fiddly: install `rust` and `cargo`, build topiary from source, then follow the `topiary-nushell` setup by hand and edit `languages.ncl` yourself. In the [cozy](https://github.com/maxim-uvarov/cozy) sandbox this is now a single command:
 
-# Make sure that .cargo/bin is in your $env.PATH
-$env.PATH | find 'cargo'
+```nu no-run
+cozy install topiary
 ```
-3. Follow the installation instructions for `topiary-nushell` at <https://github.com/blindFS/topiary-nushell?tab=readme-ov-file#setup>.
+
+It does everything for you and is safe to re-run (skips steps already done):
+
+- installs the `topiary` binary via `brew`
+- clones `topiary-nushell` (the grammar and query files) into `~/git/topiary-nushell`
+- symlinks the config into `~/.config/topiary/` — with the 4-space indent override already applied
+- compiles the tree-sitter-nu grammar `.so` by hand (`topiary prefetch` fails behind the sandbox proxy)
+
+In a fresh cozy sandbox topiary is already there — it runs as part of the build. `cozy install topiary` is for rebuilding on demand.
+
+See `../cozy/cozy-module/install/topiary.nu` for the full script.
 
 ### 4 spaces indentations
 
-Just add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
+topiary formats with 2-space indents by default. I use 4 spaces, so cozy adds `indent = "    "` to the `nu` field of `languages.ncl` automatically. To do it by hand, edit that field like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
 
 ### Demo for the nushell-show
 
