@@ -305,28 +305,24 @@ $env.config.keybindings ++= [
 
 This got much simpler. topiary now ships a prebuilt binary, so you no longer need `rust` and `cargo` to build it from source.
 
-1. Install the `topiary` binary:
+1. Install the `topiary` binary with any package manager:
 ```nu no-run
 brew install topiary
 ```
-2. Clone the `topiary-nushell` config repo (grammar and query files):
+2. Drop the two `topiary-nushell` config files into topiary's config dir. topiary reads `$env.XDG_CONFIG_HOME/topiary` — `languages.ncl` in the root, `queries/nu.scm` under `queries`:
 ```nu no-run
-git clone https://github.com/blindFS/topiary-nushell.git ~/git/topiary-nushell
+mkdir ($env.XDG_CONFIG_HOME | path join topiary queries)
+http get https://raw.githubusercontent.com/blindFS/topiary-nushell/main/languages.ncl
+    | save ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
+http get https://raw.githubusercontent.com/blindFS/topiary-nushell/main/queries/nu.scm
+    | save ($env.XDG_CONFIG_HOME | path join topiary queries nu.scm)
 ```
-3. Point topiary at the config. It reads `~/.config/topiary/`, so symlink the two files in:
-```nu no-run
-mkdir ~/.config/topiary/queries
-ln -s ~/git/topiary-nushell/languages.ncl ~/.config/topiary/languages.ncl
-ln -s ~/git/topiary-nushell/queries/nu.scm ~/.config/topiary/queries/nu.scm
-```
-4. Fetch the tree-sitter-nu grammar (compiles it into topiary's cache):
-```nu no-run
-topiary prefetch
-```
+
+That's it — topiary fetches and compiles the tree-sitter-nu grammar on first run.
 
 ### 4 spaces indentations
 
-topiary formats with 2-space indents by default. I use 4 spaces. Add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9). Since step 3 symlinks the file, edit it in `~/git/topiary-nushell/languages.ncl`.
+topiary formats with 2-space indents by default. I use 4 spaces. Add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
 
 ### Demo for the nushell-show
 
