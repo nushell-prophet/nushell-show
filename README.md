@@ -303,26 +303,30 @@ $env.config.keybindings ++= [
 
 ### Installation
 
-The old way was fiddly: install `rust` and `cargo`, build topiary from source, then follow the `topiary-nushell` setup by hand and edit `languages.ncl` yourself. In the [cozy](https://github.com/maxim-uvarov/cozy) sandbox this is now a single command:
+This got much simpler. topiary now ships a prebuilt binary, so you no longer need `rust` and `cargo` to build it from source.
 
+1. Install the `topiary` binary:
 ```nu no-run
-cozy install topiary
+brew install topiary
 ```
-
-It does everything for you and is safe to re-run (skips steps already done):
-
-- installs the `topiary` binary via `brew`
-- clones `topiary-nushell` (the grammar and query files) into `~/git/topiary-nushell`
-- symlinks the config into `~/.config/topiary/` — with the 4-space indent override already applied
-- compiles the tree-sitter-nu grammar `.so` by hand (`topiary prefetch` fails behind the sandbox proxy)
-
-In a fresh cozy sandbox topiary is already there — it runs as part of the build. `cozy install topiary` is for rebuilding on demand.
-
-See `../cozy/cozy-module/install/topiary.nu` for the full script.
+2. Clone the `topiary-nushell` config repo (grammar and query files):
+```nu no-run
+git clone https://github.com/blindFS/topiary-nushell.git ~/git/topiary-nushell
+```
+3. Point topiary at the config. It reads `~/.config/topiary/`, so symlink the two files in:
+```nu no-run
+mkdir ~/.config/topiary/queries
+ln -s ~/git/topiary-nushell/languages.ncl ~/.config/topiary/languages.ncl
+ln -s ~/git/topiary-nushell/queries/nu.scm ~/.config/topiary/queries/nu.scm
+```
+4. Fetch the tree-sitter-nu grammar (compiles it into topiary's cache):
+```nu no-run
+topiary prefetch
+```
 
 ### 4 spaces indentations
 
-topiary formats with 2-space indents by default. I use 4 spaces, so cozy adds `indent = "    "` to the `nu` field of `languages.ncl` automatically. To do it by hand, edit that field like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9).
+topiary formats with 2-space indents by default. I use 4 spaces. Add `indent = "    "` to the `nu` field of your `languages.ncl`, like I did [here](https://github.com/maxim-uvarov/topiary-nushell/blob/c0be5971ef94e69d19ef1cc09c2fe77cfb3839dd/languages.ncl#L9). Since step 3 symlinks the file, edit it in `~/git/topiary-nushell/languages.ncl`.
 
 ### Demo for the nushell-show
 
