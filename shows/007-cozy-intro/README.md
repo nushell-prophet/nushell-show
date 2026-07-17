@@ -1,3 +1,9 @@
-# Cozy - A convenient terminal environment for AI sandboxes (and macOS hosts).
+# Cozy - A convenient terminal environment for AI sandboxes (and macOS hosts)
 
-This is my image, that I use for spinning `sbx` virtual machines for colaboration with agents.
+This is the image I use for spinning up `sbx` virtual machines to collaborate with agents.
+
+I'm not a classic engineer: my only programming language is Nushell, though I'm a usability freak and just outrageously happy that I ended up in the terminal.
+
+Without external gurus and without much learning from books or videos, I like learning things by trial and error. This has its advantages and disadvantages, but I believe I have something interesting to share with the audience.
+
+Traditionally, the terminal has been an environment for technical professionals. But I believe a broader audience could benefit from the current stack of terminal apps. In my videos I hope to show some examples of why non-terminal users might start their own learning journey.
