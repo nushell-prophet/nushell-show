@@ -10,5 +10,5 @@ Traditionally, the terminal has been an environment for technical professionals.
 
 You can find all the relevant modules and configs in the [vendor/](https://github.com/nushell-prophet/cozy/tree/master/vendor) folder of the cozy repo, so you don't have to install and use `sbx`.
 
-There are quite a lot of things to talk about, so please allow me to start with some random ones that happened to come to my mind.
+There are quite a lot of things to talk about, so please allow me to start with some random ones that happened to come to my mind. I'll be demonstrating them in my real-life environment with the relevant tasks and files. I hope this will make the examples better grounded.
 
