@@ -9,16 +9,20 @@ This repository (`nushell-show`) contains materials for random advanced videos o
 ## Repository Structure
 
 ```
+README.md              # Table of contents only — links to each show's README
 shows/
 ├── 00-intro/          # Introduction video
-├── 006-*/             # Each numbered directory contains materials for one video
-├── 007-*/             # Including demo scripts (.nu files) and supporting materials
-└── 008-*/
+├── 001-*/             # Each numbered directory contains materials for one video
+├── ...
+└── 007-*/
 ```
 
-Each show directory typically contains:
+Each show directory contains:
+- `README.md` - the chapter text for that video (moved out of the root README)
 - `.nu` files - Nushell demo scripts showcasing specific features or tools
 - Supporting materials related to the video content
+
+The root README holds only the table of contents; new chapters go into their own `shows/NNN-slug/README.md` and get a link there. Shows whose content no longer works with current Nushell are marked `outdated!` in the table of contents.
 
 ## Current subjects
 
