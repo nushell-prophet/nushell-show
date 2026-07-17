@@ -1,6 +1,6 @@
 # Cozy - A convenient terminal environment for `sbx` AI sandboxes
 
-<img src="https://github.com/user-attachments/assets/96b23749-53c4-48dd-a80c-6e0d5567257a" align="right" height="210" alt="cozy logo">
+<img src="https://github.com/user-attachments/assets/96b23749-53c4-48dd-a80c-6e0d5567257a" align="right" width="30%" alt="cozy logo">
 
 This is the environment I use for spinning up `sbx` sandboxes to collaborate with agents.
 
