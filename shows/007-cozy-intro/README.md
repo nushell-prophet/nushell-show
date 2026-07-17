@@ -1,5 +1,7 @@
 # Cozy - A convenient terminal environment for AI sandboxes (and macOS hosts)
 
+<img src="https://github.com/user-attachments/assets/96b23749-53c4-48dd-a80c-6e0d5567257a" align="right" height="210" alt="cozy logo">
+
 This is the image I use for spinning up `sbx` virtual machines to collaborate with agents.
 
 I'm not a classic engineer: my only programming language is Nushell, though I'm a usability freak and just outrageously happy that I ended up in the terminal.
