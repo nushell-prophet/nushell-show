@@ -10,4 +10,4 @@ Opinionated manuals, random videos about Nushell and materials related to them.
 - [004 - Setting $env.XDG_CONFIG_HOME](shows/004-setting-xdg-config-home/README.md)
 - [005 - nu-history-tools - benchmark your commands usage against of other users](shows/005-nu-history-tools/README.md)
 - [006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot](shows/006-navigating-file-paths/README.md)
-- [007 - topiary-nushell](shows/007-topiary-demo/README.md)
+- [007 - Cozy, convenient terminal environment](shows/007-cozy-intro/README.md)
