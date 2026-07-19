@@ -51,9 +51,20 @@ copy-out --cwd # prepend the current directory as a `# path` comment line
 
 The copied text is ready to paste into any application — output lines are commented with `# =>`, in the style of [dotnu](https://github.com/nushell-prophet/dotnu) examples.
 
+### `view source` and `metadata`
+
+`view source copy-out` prints the source code of the command. Piping it into `metadata` reveals the file where the command is defined:
+
+```nu
+view source copy-out | metadata | get source
+# => /home/agent/repos/nu-goodies/nu-goodies/capture.nu
+```
+
+That path can go straight into `hx` to open the definition in Helix.
+
 ### `pbcopy` inside a Linux sandbox
 
-`view source copy-out` shows it copies via `pbcopy`. `pbcopy` is a macOS application, and the sandbox is a Linux virtual machine — so cozy ships a small [`pbcopy` script](https://github.com/nushell-prophet/cozy/blob/cf2ca3f259ffa157ee70a4ea60e54caa6c23c060/docker-files/pbcopy) that outputs its input wrapped in an OSC 52 escape sequence, which the terminal turns into a clipboard write. The same clipboard path is used by Zellij, Helix, and lazygit inside cozy.
+The source of `copy-out` shows it copies via `pbcopy`. `pbcopy` is a macOS application, and the sandbox is a Linux virtual machine — so cozy ships a small [`pbcopy` script](https://github.com/nushell-prophet/cozy/blob/cf2ca3f259ffa157ee70a4ea60e54caa6c23c060/docker-files/pbcopy) that outputs its input wrapped in an OSC 52 escape sequence, which the terminal turns into a clipboard write. The same clipboard path is used by Zellij, Helix, and lazygit inside cozy.
 
 ### Ctrl+Alt+C — copy the command line
 
