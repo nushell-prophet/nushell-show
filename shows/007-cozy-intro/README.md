@@ -14,3 +14,72 @@ You can find all the relevant modules and configs in the [vendor/](https://githu
 
 There are quite a lot of things to talk about, so let me start with a few that come to mind. I'll be demonstrating them in my real-life environment with the relevant tasks and files. I hope this will make the examples better grounded.
 
+## Copying commands and their output
+
+[Youtube](https://youtu.be/AcDM7-U2e2A)
+
+`sbx` is a CLI by Docker, designed to create and run Linux virtual machines as sandboxes, so users can work with agents in an isolated environment. It is available for macOS and Windows.
+
+```sh
+git clone https://github.com/nushell-prophet/cozy
+cd cozy
+sbx run shell --kit sbx-kit/ .
+```
+
+In this video I show cozy in action and return to the installation steps later. The topic here is copying commands and their output.
+
+### `example`
+
+[`example`](https://github.com/nushell-prophet/nu-goodies/blob/6fa9f2b9a283195880d3e430d465a684ac24608d/nu-goodies/commands.nu#L126) (from [nu-goodies](https://github.com/nushell-prophet/nu-goodies)) is appended to a pipeline. It copies the whole example to the clipboard: the command itself, wrapped in `nu -c '...'`, followed by its output commented with `# =>` — ready to paste into any application.
+
+```nu
+ls nu-goodies | first 3 | reject modified | example
+```
+
+It has flags too: `--no-copy`, `--no-comment`, `--bare` (raw command without the `nu -c` wrap), `--cwd` (prepend the current directory as a comment line).
+
+### `copy-out`
+
+[`copy-out`](https://github.com/nushell-prophet/nu-goodies/blob/6fa9f2b9a283195880d3e430d465a684ac24608d/nu-goodies/capture.nu#L295) (also from nu-goodies) copies commands together with their output from the Zellij pane scrollback to the clipboard. Its completions list the recent commands of the current session, so you can pick which ones to copy:
+
+```nu
+copy-out       # the last command with its output
+copy-out 3     # from the 3rd-to-last command through the last
+copy-out 3 1   # the 3rd-to-last and the last, separately
+copy-out --cwd # prepend the current directory as a `# path` comment line
+```
+
+The copied text is ready to paste into any application — output lines are commented with `# =>`, in the style of [dotnu](https://github.com/nushell-prophet/dotnu) examples.
+
+### `pbcopy` inside a Linux sandbox
+
+`view source copy-out` shows it copies via `pbcopy`. `pbcopy` is a macOS application, and the sandbox is a Linux virtual machine — so cozy ships a small [`pbcopy` script](https://github.com/nushell-prophet/cozy/blob/cf2ca3f259ffa157ee70a4ea60e54caa6c23c060/docker-files/pbcopy) that outputs its input wrapped in an OSC 52 escape sequence, which the terminal turns into a clipboard write. The same clipboard path is used by Zellij, Helix, and lazygit inside cozy.
+
+### Ctrl+Alt+C — copy the command line
+
+A [Nushell keybinding](https://github.com/nushell-prophet/my-dotfiles/blob/00102e715c457137d76ee33b35533c71d441b96a/nushell/config.nu#L467) copies whatever is currently typed in the command line and appends a ` # copied` confirmation:
+
+```nu
+$env.config.keybindings ++= [
+    {
+        name: copy_command
+        modifier: control_alt
+        keycode: char_c
+        mode: [emacs]
+        event: {
+            send: executehostcommand
+            cmd: "commandline | pbcopy; commandline edit --append ' # copied'"
+        }
+    }
+]
+```
+
+### Capture the pane into Helix
+
+Two [Zellij keybindings](https://github.com/nushell-prophet/my-dotfiles/blob/00102e715c457137d76ee33b35533c71d441b96a/zellij/config.kdl#L50) open the pane content in Helix in a floating window, where it can be edited or partially copied:
+
+- `Super Shift E` (`Cmd Shift E` on Mac) — captures the visible portion of the screen
+- `Super Alt E` — captures the full scrollback
+
+You will see me using these tools in the next videos.
+
