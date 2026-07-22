@@ -96,5 +96,5 @@ You will see me using these tools in the next videos.
 
 ## Installation
 
-This video installs cozy from scratch: the three-command quick start, what the installer actually does step by step, and `cozy verify` to check it landed. The full write-up is a step-by-step manual: [Installing Cozy into an `sbx` Sandbox](https://github.com/nushell-prophet/nushell-prophet-manuals/blob/main/manuals/06-install-cozy/manual.md).
+This video installs cozy from scratch: the three-command quick start, what the installer actually does step by step, and `cozy verify` to check it landed. The full write-up is a step-by-step manual: [Installing Cozy into an `sbx` Sandbox](https://github.com/nushell-prophet/nushell-prophet-manuals/blob/main/manuals/06-install-cozy/README.md).
 
