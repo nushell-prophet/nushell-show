@@ -41,8 +41,9 @@ When creating or modifying `.nu` files:
 - Follow Nushell syntax conventions (pipe-based data flow)
 - Include usage examples as comments when demonstrating custom commands
 
-## Related Repository
+## Related repositories
 
-The companion repository `/Users/user/git/nushell-prophet-manuals` contains in-depth manuals for the same YouTube channel. Content decisions should consider which repository is more appropriate:
-- `nushell-show` (this repo): Quick demonstrations, advanced features, tool integrations
-- `nushell-prophet-manuals`: Comprehensive tutorials, step-by-step guides, foundational topics
+Sibling repos in the same workspace (checked out side by side):
+- `../nushell-prophet-manuals` — in-depth sequential manuals for the same channel. When placing content, decide which repo fits: this repo is quick demonstrations, advanced features, and tool integrations; manuals are comprehensive step-by-step guides and foundational topics.
+- `../nushell-show-scratchpad` — the production scratchpad for these episodes: transcripts, drafts, cover renders, and per-episode `status.nuon`. Working files that aren't released live there, not here.
+- `../nushell-show-module` — `npshow`, which renders the terminal cover screens for these episodes.
