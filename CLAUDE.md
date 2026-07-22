@@ -19,7 +19,7 @@ shows/
 
 Each show directory contains:
 - `README.md` - the chapter text for that video (moved out of the root README)
-- `.nu` files - Nushell demo scripts showcasing specific features or tools
+- `.nu` files (some shows only) - Nushell demo scripts showcasing specific features or tools. Not every show has them — several are README-only.
 - Supporting materials related to the video content
 
 The root README holds only the table of contents; new chapters go into their own `shows/NNN-slug/README.md` and get a link there. Shows whose content no longer works with current Nushell are marked `outdated!` in the table of contents.
@@ -33,6 +33,7 @@ Videos cover advanced Nushell topics including:
 - History analysis tools
 - Path navigation techniques
 - Code formatting with topiary-nushell
+- The cozy terminal environment for AI agents running under `sbx` sandboxes (007; includes the `## Installation` section that points to the install manual)
 
 ## Working with Nushell Code
 
