@@ -6,6 +6,8 @@ Small Nushell settings, shown one at a time, with the visible difference each on
 
 ## History — store it in SQLite
 
+[▶ 0:48](https://youtu.be/WTgFInlYFpI?t=48)
+
 ```nu
 $env.config.history.file_format = "Sqlite"
 $env.config.history.isolation = true
@@ -18,6 +20,8 @@ With `Sqlite`, history is a real database instead of a flat text file. Now every
 
 ## Table look — footer and header line
 
+[▶ 2:28](https://youtu.be/WTgFInlYFpI?t=148)
+
 ```nu
 $env.config.footer_mode = "Always"
 $env.config.table.header_on_separator = true
@@ -26,6 +30,8 @@ $env.config.table.header_on_separator = true
 `footer_mode = "Always"` repeats the column headers at the bottom of every table — handy when a table is tall and the top headers have scrolled away. `header_on_separator = true` moves the header text onto the top border line instead of its own row, so each table is one line shorter.
 
 ## Abbreviations — expansions that land in history
+
+[▶ 3:03](https://youtu.be/WTgFInlYFpI?t=183)
 
 ```nu
 $env.config.abbreviations = {
@@ -49,6 +55,8 @@ The point is what an alias can't do: the *expanded* command is what runs and wha
 
 ## Working-directories menu — Alt+Shift+R
 
+[▶ 3:29](https://youtu.be/WTgFInlYFpI?t=209)
+
 ```nu
 $env.config.keybindings ++= [
     {
@@ -64,6 +72,8 @@ $env.config.keybindings ++= [
 Press `Alt+Shift+R` to open a list of the directories you have visited, most-recently-used first. Type to filter, press Enter to `cd` there. The list comes straight from the SQLite history (`SELECT cwd FROM history GROUP BY cwd ORDER BY MAX(start_timestamp) DESC`) — the first setting in this episode is what makes that query possible.
 
 ## Variables menu — Alt+O
+
+[▶ 5:14](https://youtu.be/WTgFInlYFpI?t=314)
 
 ```nu
 $env.config.keybindings ++= [
@@ -85,6 +95,8 @@ Press `Alt+O`, type part of a variable name to filter with fzf, press Enter to i
 It is built with `executehostcommand` + fzf instead of a native Nushell menu on purpose: since ~0.101, `scope variables` inside a menu's source closure only sees the closure's own scope ([nushell#14071](https://github.com/nushell/nushell/issues/14071)), so a native menu can't list your real variables. Running the command in REPL scope sidesteps that and sees them all.
 
 ## Raw-string toggle — Ctrl+V
+
+[▶ 6:16](https://youtu.be/WTgFInlYFpI?t=376)
 
 ```nu
 $env.config.keybindings ++= [
