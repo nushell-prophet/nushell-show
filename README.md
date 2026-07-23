@@ -11,3 +11,4 @@ Opinionated manuals, random videos about Nushell and materials related to them.
 - [005 - nu-history-tools - benchmark your commands usage against of other users](shows/005-nu-history-tools/README.md)
 - [006 - Navigating file paths in Nushell using internal functionality, FZF, or Broot](shows/006-navigating-file-paths/README.md)
 - [007 - Cozy, convenient terminal environment](shows/007-cozy-intro/README.md)
+- [009 - Nushell configs and their effect (part 1)](shows/009-nushell-configs-1/README.md)
